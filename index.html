@@ -513,6 +513,21 @@
             .photo-card {
                 height: 280px !important;
             }
+
+            .proc-item {
+                grid-template-columns: 70px 1fr !important;
+                gap: 12px !important;
+            }
+
+            .proc-item > div:last-child {
+                grid-column: 1 / -1 !important;
+                text-align: left !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                border-top: 1px dashed var(--border-light) !important;
+                padding-top: 8px !important;
+            }
         }
     </style>
 </head>
@@ -719,11 +734,15 @@
                                 <span style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--success-green);">+Rp126.295</span>
                             </div>
 
-                            <div class="card accent-green" style="padding: 16px; text-align: center; border-width: 1.5px;">
+                            <div class="card accent-green" style="padding: 16px; text-align: center; border-width: 1.5px; margin-bottom: 16px;">
                                 <div style="font-size: 15px; color: var(--success-green); font-weight: 700;">
                                     ✓ TOTAL DANA PAS RP1.500.000 TANPA KEKURANGAN MODAL
                                 </div>
                             </div>
+
+                            <button onclick="openProcurementModal()" style="width: 100%; background: var(--coffee-primary); color: #FFFFFF; border: none; padding: 14px 20px; border-radius: 50px; font-family: var(--font-mono); font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 14px rgba(180, 83, 9, 0.35); transition: all 0.2s;">
+                                🔍 Lihat Rincian Detail 18+ Barang Shopee &rarr;
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -818,27 +837,27 @@
                     <div class="kicker anim-in">KEUNGGULAN MOBILITAS MOTOR</div>
                     <h2 class="title-slide anim-in">Menjemput Pelanggan di <span style="color: var(--coffee-primary);">Titik Keramaian Nyata</span>.</h2>
                     <p class="text-lead anim-in" style="font-size: 21px; margin-bottom: 26px;">
-                        Keunggulan motor: kami tidak diam menunggu pembeli datang, melainkan berpindah mengikuti jam padat aktivitas warga Sukabumi. Klik tombol shift untuk melihat rute:
+                        Keunggulan motor: kami tidak diam menunggu pembeli, melainkan aktif berpindah mengikuti jam padat aktivitas warga Sukabumi. Klik tombol shift untuk melihat rute:
                     </p>
 
                     <!-- Interactive Shift Tabs -->
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 22px;" class="anim-in">
                         <div class="shift-tab-btn selected" onclick="selectShift(0, this)">
                             <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--coffee-primary); margin-bottom: 4px;">SHIFT 1 &bull; PAGI</div>
-                            <div style="font-size: 18px; font-weight: 700; color: var(--text-heading);">Stasiun & RS Bunut</div>
-                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">06.30 – 09.00 WIB</div>
+                            <div style="font-size: 18px; font-weight: 700; color: var(--text-heading);">Kawasan Cisaat</div>
+                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">08.00 – 11.00 WIB</div>
                         </div>
 
                         <div class="shift-tab-btn" onclick="selectShift(1, this)">
                             <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--coffee-primary); margin-bottom: 4px;">SHIFT 2 &bull; SIANG</div>
-                            <div style="font-size: 18px; font-weight: 700; color: var(--text-heading);">Kampus UMMI & Poltek</div>
-                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">10.00 – 14.00 WIB</div>
+                            <div style="font-size: 18px; font-weight: 700; color: var(--text-heading);">Kampus UMMI & Kota</div>
+                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">11.30 – 14.30 WIB</div>
                         </div>
 
                         <div class="shift-tab-btn" onclick="selectShift(2, this)">
                             <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--coffee-primary); margin-bottom: 4px;">SHIFT 3 &bull; SORE</div>
-                            <div style="font-size: 18px; font-weight: 700; color: var(--text-heading);">Lapang Merdeka</div>
-                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">15.30 – 18.00 WIB</div>
+                            <div style="font-size: 18px; font-weight: 700; color: var(--text-heading);">Kawasan Jalur</div>
+                            <div style="font-size: 14px; color: var(--text-muted); margin-top: 2px;">15.00 – 18.00 WIB</div>
                         </div>
 
                         <div class="shift-tab-btn" onclick="selectShift(3, this)">
@@ -852,15 +871,15 @@
                     <div class="card accent-amber anim-in" id="shiftDetailCard" style="padding: 28px 32px; border-width: 2px;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
                             <div>
-                                <span class="badge badge-amber" id="shiftBadge" style="margin-bottom: 8px;">SHIFT PAGI (06.30 - 09.00 WIB)</span>
+                                <span class="badge badge-amber" id="shiftBadge" style="margin-bottom: 8px;">SHIFT 1 &bull; PAGI (08.00 - 11.00 WIB)</span>
                                 <h3 id="shiftTitle" style="font-family: var(--font-serif); font-size: 28px; color: var(--text-heading); margin-bottom: 6px;">
-                                    Area Stasiun Kereta Api Sukabumi & RSUD R. Syamsudin, S.H. (Bunut)
+                                    Kawasan Cisaat (Pertokoan, Perkantoran & Sentra Bisnis Lokal)
                                 </h3>
                             </div>
                             <span class="badge badge-green" id="shiftTargetBadge">TARGET: 15–20 CUP</span>
                         </div>
                         <p id="shiftDesc" style="font-size: 18px; color: var(--text-body); line-height: 1.6;">
-                            <strong>Target Konsumen:</strong> Penumpang komuter KA Pangrango Sukabumi–Bogor yang terburu-buru, pergantian shift perawat/dokter, dan keluarga penunggu pasien yang butuh asupan kopi dingin praktis tanpa harus jalan jauh ke minimarket.
+                            <strong>Target Konsumen:</strong> Jam buka aktivitas pagi (08.00–11.00 WIB) menyasar karyawan toko, staf kantor/perbankan Cisaat, pengemudi, dan warga yang butuh asupan kopi dingin berkualitas untuk memulai hari tanpa repot keluar area kerja.
                         </p>
                     </div>
                 </div>
@@ -1040,14 +1059,14 @@
                             </div>
                         </div>
 
-                        <!-- Jaminan 2: Transparansi Harian -->
+                        <!-- Jaminan 2: Laporan Tertib Tiap Akhir Bulan -->
                         <div class="card" style="border-top: 6px solid var(--coffee-primary); padding: 28px;">
-                            <div style="font-size: 40px; margin-bottom: 12px;">📊</div>
+                            <div style="font-size: 40px; margin-bottom: 12px;">📑</div>
                             <div style="font-weight: 800; font-size: 21px; color: var(--text-heading); margin-bottom: 10px;">
-                                2. Transparansi Kas & Tabungan Harian
+                                2. Rekapitulasi Kas di Akhir Bulan
                             </div>
                             <div style="font-size: 16px; color: var(--text-muted); line-height: 1.6;">
-                                Setiap malam pukul 21.30 WIB, rekapitulasi penjualan harian (jumlah cup terjual, omzet kotor, serta saldo tabungan Rp30k/hari) dilaporkan berkala via WhatsApp agar Bang Abai bisa memantau akumulasi dananya menuju 1 Januari.
+                                Laporan keuangan, penjualan, dan posisi tabungan pengembalian (Rp30k/hari) dikirimkan secara tertib <strong>setiap akhir bulan</strong> (akhir November & akhir Desember). Kami tidak mengganggu kesibukan harian Bang Abai dengan chat tiap malam, namun transparansi tetap terjaga 100%.
                             </div>
                         </div>
 
@@ -1065,7 +1084,7 @@
 
                     <div style="margin-top: 26px; text-align: center;" class="anim-in">
                         <span style="font-size: 17px; color: var(--text-muted); font-style: italic;">
-                            "Bisnis jalanan yang disiplin secara angka dan jujur secara pelaporan adalah bisnis yang paling cepat menghasilkan uang tunai."
+                            "Komunikasi yang tenang dan tidak merepotkan, namun didasari integritas angka yang tepat waktu."
                         </span>
                     </div>
                 </div>
@@ -1156,10 +1175,10 @@
                     <div class="card accent-amber anim-in" style="padding: 30px 48px; max-width: 760px; width: 100%; text-align: center; border-width: 2px; margin-bottom: 22px;">
                         <div style="font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.15em; color: var(--coffee-primary); text-transform: uppercase; margin-bottom: 6px;">PENGELOLA DANA & EKSEKUTOR:</div>
                         <div style="font-family: var(--font-serif); font-size: 42px; color: var(--text-heading); margin-bottom: 4px;">Abel Hendrik</div>
-                        <div style="font-size: 15px; color: var(--text-muted); margin-bottom: 14px;">Kota Sukabumi, Jawa Barat &bull; WA: 0896-7347-4961</div>
+                        <div style="font-size: 15px; color: var(--text-muted); margin-bottom: 14px;">Kota Sukabumi, Jawa Barat &bull; WA: <strong>0898-6617-589</strong></div>
                         
-                        <a href="https://wa.me/6289673474961?text=Halo%20Abel,%20saya%20Bang%20Abai.%20Saya%20sudah%20review%20proposal%20kopi%20keliling%20Rp1,5%20juta.%20Mari%20kita%20sepakati%20jatuh%20tempo%201%20Januari%20dan%20eksekusi." target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: #FFFFFF; background: var(--coffee-primary); text-decoration: none; padding: 12px 28px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 16px rgba(180, 83, 9, 0.35); transition: transform 0.2s;">
-                            💬 Hubungi Abel via WhatsApp (Konfirmasi Modal)
+                        <a href="https://wa.me/628986617589?text=Halo%20Abel,%20saya%20Bang%20Abai.%20Saya%20sudah%20review%20proposal%20kopi%20keliling%20Rp1,5%20juta.%20Mari%20kita%20sepakati%20jatuh%20tempo%201%20Januari%20dan%20eksekusi." target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: #FFFFFF; background: var(--coffee-primary); text-decoration: none; padding: 12px 28px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 16px rgba(180, 83, 9, 0.35); transition: transform 0.2s;">
+                            💬 Hubungi Abel via WhatsApp (0898-6617-589)
                         </a>
                     </div>
 
@@ -1182,6 +1201,333 @@
         <button class="nav-btn" id="prevBtn" title="Slide Sebelumnya (&larr;)">PREV</button>
         <span class="slide-counter" id="counterDisplay">01 / 10</span>
         <button class="nav-btn" id="nextBtn" title="Slide Selanjutnya (&rarr;)">NEXT</button>
+    </div>
+
+
+    <!-- FULL MODAL RINCIAN PENGADAAN BARANG (DROPDOWN MODAL) -->
+    <div id="procurementModal" style="position: fixed; inset: 0; z-index: 100001; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; padding: 30px;" onclick="closeProcurementModal(event)">
+        <div style="background: #FFFFFF; width: 100%; max-width: 1100px; max-height: 88vh; border-radius: 24px; box-shadow: 0 30px 80px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; position: relative;" onclick="event.stopPropagation()">
+            
+            <!-- Modal Header -->
+            <div style="padding: 24px 32px; border-bottom: 1.5px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; background: #FAFBFD;">
+                <div>
+                    <span class="badge badge-amber" style="font-size: 12px; margin-bottom: 6px;">RINCIAN RESMI KERANJANG SHOPEE</span>
+                    <h3 style="font-family: var(--font-serif); font-size: 28px; color: var(--text-heading); margin: 0;">
+                        Daftar Belanja Lengkap: Peralatan Barista & Bahan Baku
+                    </h3>
+                </div>
+                <button onclick="closeProcurementModal()" style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--border-light); background: #FFFFFF; color: var(--text-muted); font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center;">✕</button>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div style="padding: 14px 32px; border-bottom: 1px solid var(--border-light); display: flex; gap: 12px; background: #FFFFFF;">
+                <button id="tabAll" class="interactive-tab-btn active" onclick="filterProcurement('all')">Semua Barang (18)</button>
+                <button id="tabCapex" class="interactive-tab-btn" onclick="filterProcurement('capex')">Peralatan Barista & Boks (11)</button>
+                <button id="tabStarter" class="interactive-tab-btn" onclick="filterProcurement('starter')">Bahan Baku & Kemasan (7)</button>
+            </div>
+
+            <!-- Scrollable Items List -->
+            <div id="procurementList" style="flex: 1; overflow-y: auto; padding: 24px 32px; display: flex; flex-direction: column; gap: 14px;">
+                
+                <!-- Item 1: Cooler Box -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/cooler_box.jpg" alt="KORVO Cooler Box" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; ALAT</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">KORVO Cooler Box 16L (+ Ice Bag Gel)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Menjaga es kristal higienis tahan beku 18–24 jam keliling Kota Sukabumi.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp252.449</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Shopee</div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Kompor Camping -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/kompor_camping.jpg" alt="FlashFish Kompor Camping" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; ALAT</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">FlashFish Kompor Gas 2800W Anti-Angin</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Pemanas air portabel cepat untuk seduh/ekstraksi darurat di jalanan.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp109.382</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Shopee</div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Timbangan Digital -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/timbangan_digital.jpg" alt="HYUNDAI Timbangan Digital" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; ALAT</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">HYUNDAI Timbangan Digital Dapur Mini (1g/5kg)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Kalibrasi takaran gramasi kopi dan racikan krimer konsisten per cup.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp81.000</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Shopee Mall</div>
+                    </div>
+                </div>
+
+                <!-- Item 4: Boks Motor Sekat -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 12px; background: var(--amber-soft); display: flex; align-items: center; justify-content: center; font-size: 32px; border: 1px solid var(--border-light);">🛵</div>
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; DISPLAY</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Boks Kopi Keliling Motor (Model Sekat Kayu)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Etalase display jualan kokoh di atas jok/behel motor, rapi dan higienis.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp165.409</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Custom</div>
+                    </div>
+                </div>
+
+                <!-- Item 5: Bar Mat -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/bar_mat.jpg" alt="One Two Cups Bar Mat" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; ALAT</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">One Two Cups Bar Mat Rubber (45 x 30 cm)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Alas tatakan peracikan karet antislip di atas boks motor agar cairan tertampung.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp17.280</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Shopee Mall</div>
+                    </div>
+                </div>
+
+                <!-- Item 6: Rak Gelas Kayu -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/rak_kayu.jpg" alt="Rak Kayu Cup" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; DISPLAY</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Rak Gelas Cup Display Kayu 3 Lubang (Ati'an Craft)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Organizer cup 12 oz tegak dan sedotan agar praktis dan estetis di mata pembeli.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp37.147</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Shopee Star+</div>
+                    </div>
+                </div>
+
+                <!-- Item 7: Hand Mixer / Frother -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/hand_mixer.jpg" alt="One Two Cups Hand Mixer" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; ALAT</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">One Two Cups Hand Mixer Mini / Milk Frother</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Melarutkan krimer & foaming susu agar tekstur ekstra creamy dan foam stabil.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp31.120</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Shopee Mall</div>
+                    </div>
+                </div>
+
+                <!-- Item 8: Jigger Stainless -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/jigger.jpg" alt="One Two Cups Jigger" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; ALAT</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">One Two Cups Bartender Jigger Stainless Steel (30/50ml)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Takaran baku sirup (aren, karamel, vanilla) per porsi agar rasa seragam.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp26.320</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Shopee Mall</div>
+                    </div>
+                </div>
+
+                <!-- Item 9: Gelas Espresso Kayu -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/gelas_espresso.jpg" alt="Gelas Takar Espresso" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; ALAT</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">One Two Cups Gelas Takar Espresso 100ml Gagang Kayu</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Takaran presisi konsentrat kopi saring pekat per cup.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp20.720</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Unit &bull; Shopee Mall</div>
+                    </div>
+                </div>
+
+                <!-- Item 10: Jerigen 5L -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/jerigen_5l.jpg" alt="Jerigen 5 Liter" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; PENAMPUNG</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Jerigen Food Grade HDPE 5 Liter (D.K PLAST)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Wadah bersih penyimpanan konsentrat seduhan kopi besar & air bersih.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp36.500</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">3 Unit &bull; Shopee Star+</div>
+                    </div>
+                </div>
+
+                <!-- Item 11: Botol NANVAN -->
+                <div class="proc-item capex card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/botol_nanvan.jpg" alt="Botol Minuman NANVAN" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-amber" style="font-size: 11px; padding: 3px 8px;">CAPEX &bull; BOTOL</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">NANVAN Botol Minuman / Dispenser 1000 ml</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Wadah premix susu krimer dingin siap tuang disimpan di dalam cooler box.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp17.500</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">3 Unit &bull; Shopee Star+</div>
+                    </div>
+                </div>
+
+                <!-- Item 12: Cup PET 12 oz -->
+                <div class="proc-item starter card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/cup_12oz.jpg" alt="Cup 12 oz Datar" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-green" style="font-size: 11px; padding: 3px 8px;">STARTER &bull; KEMASAN</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Gelas Plastik PET 12 oz Datar + Tutup (50 pcs)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Kemasan gelas plastik tebal premium untuk 50 porsi penjualan perdana.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp30.000</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Pack (50pcs)</div>
+                    </div>
+                </div>
+
+                <!-- Item 13: Nabata Caramel -->
+                <div class="proc-item starter card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/nabata_cart.jpg" alt="Nabata Sirup Karamel" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-green" style="font-size: 11px; padding: 3px 8px;">STARTER &bull; BAHAN</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Nabata Sirup Karamel (1.000 ml)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Sirup perasa karamel untuk ~50 cup varian Caramel Latte.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp52.235</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Botol (1 Liter)</div>
+                    </div>
+                </div>
+
+                <!-- Item 14: Susu UHT Diamond -->
+                <div class="proc-item starter card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/diamond_uht.jpg" alt="Diamond UHT Milk" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-green" style="font-size: 11px; padding: 3px 8px;">STARTER &bull; BAHAN</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Diamond Milk Susu UHT Full Cream (1.000 ml)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Susu cair murni segar untuk campuran racikan premix susu.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp20.948</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Liter &bull; Official</div>
+                    </div>
+                </div>
+
+                <!-- Item 15: Cling Wrap -->
+                <div class="proc-item starter card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/cling_wrap.jpg" alt="Delkochoice Cling Wrap" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-green" style="font-size: 11px; padding: 3px 8px;">STARTER &bull; HIGIENITAS</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Plastik Cling Wrap Food Grade Delkochoice (30cm x 500m)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Penutup segel boks higienis dan pelindung debu jalanan.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp76.800</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Roll (500m)</div>
+                    </div>
+                </div>
+
+                <!-- Item 16: Lakban Prima Tape -->
+                <div class="proc-item starter card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <img src="assets/items/lakban_cart.jpg" alt="Lakban Prima Tape" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-light);">
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-green" style="font-size: 11px; padding: 3px 8px;">STARTER &bull; SEGEL</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Prima Tape Lakban Segel GoFood 12mm (3 Roll)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Segel pengaman tutup cup anti tumpah & garansi kebersihan.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp8.700</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">3 Roll &bull; Shopee</div>
+                    </div>
+                </div>
+
+                <!-- Item 17: Gula Aren Nutrifarm -->
+                <div class="proc-item starter card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 12px; background: var(--amber-soft); display: flex; align-items: center; justify-content: center; font-size: 32px; border: 1px solid var(--border-light);">🌴</div>
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-green" style="font-size: 11px; padding: 3px 8px;">STARTER &bull; BAHAN</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Nutrifarm Gula Aren Cair Murni Asli (1.000 ml)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Bahan baku manis alami untuk menu best seller Es Kopi Susu Gula Aren.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp72.680</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Botol (1 Liter)</div>
+                    </div>
+                </div>
+
+                <!-- Item 18: Melpona Vanilla -->
+                <div class="proc-item starter card" style="padding: 16px 20px; display: grid; grid-template-columns: 80px 1fr 140px; gap: 20px; align-items: center;">
+                    <div style="width: 80px; height: 80px; border-radius: 12px; background: var(--amber-soft); display: flex; align-items: center; justify-content: center; font-size: 32px; border: 1px solid var(--border-light);">🍦</div>
+                    <div>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-green" style="font-size: 11px; padding: 3px 8px;">STARTER &bull; BAHAN</span>
+                            <strong style="font-size: 17px; color: var(--text-heading);">Melpona Vanilla Syrup Premium (750 ml)</strong>
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-muted);">Sirup rasa vanila harum khas kafe untuk varian Vanilla Latte.</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-family: var(--font-mono); font-size: 18px; font-weight: 700; color: var(--coffee-primary);">Rp101.149</div>
+                        <div style="font-size: 13px; color: var(--text-faint);">1 Botol (750ml)</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div style="padding: 16px 32px; border-top: 1.5px solid var(--border-light); background: #FAFBFD; display: flex; justify-content: space-between; align-items: center;">
+                <div style="font-size: 14px; color: var(--text-muted);">
+                    Semua barang di atas siap di-checkout langsung begitu dana kemitraan Bang Abai cair.
+                </div>
+                <button onclick="closeProcurementModal()" class="interactive-tab-btn active" style="padding: 8px 24px;">Tutup Rincian ✕</button>
+            </div>
+
+        </div>
     </div>
 
     <!-- SCRIPT LOGIC -->
@@ -1227,6 +1573,11 @@
 
             bindEvents() {
                 document.addEventListener('keydown', (e) => {
+                    const pModal = document.getElementById('procurementModal');
+                    if (pModal && pModal.style.display === 'flex') {
+                        if (e.key === 'Escape') closeProcurementModal();
+                        return;
+                    }
                     if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) {
                         e.preventDefault();
                         this.next();
@@ -1317,30 +1668,30 @@
         }
 
         // === INTERACTIVE SHIFT LOGIC (SLIDE 5) ===
-        const shiftData = [
+                const shiftData = [
             {
-                badge: "SHIFT 1 &bull; PAGI (06.30 - 09.00 WIB)",
-                title: "Area Stasiun Kereta Api Sukabumi & RSUD R. Syamsudin, S.H. (Bunut)",
+                badge: "SHIFT 1 &bull; PAGI (08.00 - 11.00 WIB)",
+                title: "Kawasan Cisaat (Pertokoan, Perkantoran & Sentra Bisnis Lokal)",
                 target: "TARGET: 15–20 CUP",
-                desc: "<strong>Target Konsumen:</strong> Penumpang komuter KA Pangrango Sukabumi–Bogor yang terburu-buru, pergantian shift perawat/dokter, dan keluarga penunggu pasien yang butuh asupan kopi dingin praktis tanpa harus jalan jauh ke minimarket."
+                desc: "<strong>Target Konsumen:</strong> Jam buka aktivitas pagi (08.00–11.00 WIB) menyasar karyawan toko, staf kantor/perbankan Cisaat, pengemudi, dan warga yang butuh asupan kopi dingin berkualitas untuk memulai hari tanpa repot keluar area kerja."
             },
             {
-                badge: "SHIFT 2 &bull; SIANG (10.00 - 14.00 WIB)",
-                title: "Kawasan Kampus UMMI & Politeknik Sukabumi",
+                badge: "SHIFT 2 &bull; SIANG (11.30 - 14.30 WIB)",
+                title: "Kawasan Kampus UMMI, Politeknik & Perkantoran Pusat Kota",
                 target: "TARGET: 15–20 CUP",
-                desc: "<strong>Target Konsumen:</strong> Mahasiswa saat jeda antar-kelas, pengemudi ojek online yang mangkal di sekitar Jl. Cik Ditiro, dan karyawan pertokoan sekitar yang butuh kopi susu dingin harga kantong mahasiswa (Rp8.000–Rp10.000)."
+                desc: "<strong>Target Konsumen:</strong> Mahasiswa saat jam makan siang dan jeda antar-kelas, pengemudi ojek online sekitar Jl. Cik Ditiro, dan karyawan kantor yang butuh es kopi susu segar dengan harga pas di kantong (Rp8.000–Rp10.000)."
             },
             {
-                badge: "SHIFT 3 &bull; SORE (15.30 - 18.00 WIB)",
-                title: "Lapang Merdeka & Alun-Alun Kota Sukabumi",
+                badge: "SHIFT 3 &bull; SORE (15.00 - 18.00 WIB)",
+                title: "Kawasan Jalur (Jl. Jalur Lingkar Selatan Sukabumi)",
                 target: "TARGET: 15–25 CUP",
-                desc: "<strong>Target Konsumen:</strong> Warga yang jogging dan berolahraga sore, keluarga yang mengasuh anak di ruang terbuka, serta komunitas sepeda dan skateboard yang butuh kesegaran kopi susu tanpa ribet."
+                desc: "<strong>Target Konsumen:</strong> Warga yang nongkrong santai sore di sepanjang koridor Jalur Lingkar Selatan, komunitas motor, serta arus komuter pulang kerja yang ingin istirahat sejenak sambil menikmati es kopi segar."
             },
             {
                 badge: "SHIFT 4 &bull; MALAM (18.30 - 21.00 WIB)",
                 title: "Kawasan Kuliner Dago (Jl. Ir. H. Djuanda)",
                 target: "TARGET: 10–15 CUP",
-                desc: "<strong>Target Konsumen:</strong> Pemuda dan komunitas yang nongkrong santai di pedestrian Dago yang mencari alternatif kopi enak dan dingin dengan harga hemat tanpa harus duduk di kafe mahal."
+                desc: "<strong>Target Konsumen:</strong> Pemuda dan komunitas yang nongkrong santai di pedestrian Dago mencari alternatif kopi enak dan dingin dengan harga hemat tanpa harus duduk di kafe mahal."
             }
         ];
 
@@ -1373,6 +1724,57 @@
                 target.innerHTML = shiftData[index].target;
                 desc.innerHTML = shiftData[index].desc;
             }
+        }
+
+
+        // === PROCUREMENT MODAL LOGIC (SLIDE 3) ===
+        function openProcurementModal() {
+            const m = document.getElementById('procurementModal');
+            if (m) {
+                m.style.display = 'flex';
+                if (window.gsap) {
+                    gsap.fromTo('#procurementModal > div', 
+                        { scale: 0.9, opacity: 0 }, 
+                        { scale: 1, opacity: 1, duration: 0.25, ease: 'power2.out' }
+                    );
+                }
+            }
+        }
+
+        function closeProcurementModal(e) {
+            if (e) e.stopPropagation();
+            const m = document.getElementById('procurementModal');
+            if (m) {
+                if (window.gsap) {
+                    gsap.to('#procurementModal > div', {
+                        scale: 0.9, 
+                        opacity: 0, 
+                        duration: 0.18, 
+                        ease: 'power2.in',
+                        onComplete: () => { m.style.display = 'none'; }
+                    });
+                } else {
+                    m.style.display = 'none';
+                }
+            }
+        }
+
+        function filterProcurement(cat) {
+            document.querySelectorAll('#procurementModal .interactive-tab-btn').forEach(b => b.classList.remove('active'));
+            if (cat === 'all') document.getElementById('tabAll').classList.add('active');
+            if (cat === 'capex') document.getElementById('tabCapex').classList.add('active');
+            if (cat === 'starter') document.getElementById('tabStarter').classList.add('active');
+
+            const items = document.querySelectorAll('.proc-item');
+            items.forEach(item => {
+                if (cat === 'all') {
+                    item.style.display = 'grid';
+                } else if (item.classList.contains(cat)) {
+                    item.style.display = 'grid';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         }
 
         window.addEventListener('DOMContentLoaded', () => {
